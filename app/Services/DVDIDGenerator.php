@@ -8,9 +8,9 @@ class DVDIDGenerator
     {
         $number = 1;
         if ($lastId) {
-            $number = intval(substr($lastId, 1)) + 1;
+            $number = intval(substr($lastId, 3)) + 1;
         }
-        
+
         return 'DVD' . str_pad($number, 5, '0', STR_PAD_LEFT);
     }
 }

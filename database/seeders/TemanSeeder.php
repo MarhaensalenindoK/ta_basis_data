@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Teman;
+use App\Services\TIDGenerator;
 
 class TemanSeeder extends Seeder
 {
@@ -13,6 +14,13 @@ class TemanSeeder extends Seeder
      */
     public function run(): void
     {
-        Teman::factory(10)->create();
+        $lastId = null;
+        for ($i = 1; $i <= 10; $i++) {
+            $teman = Teman::factory()->create([
+                'TID' => TIDGenerator::generateId($lastId),
+            ]);
+
+            $lastId = $teman->TID;
+        }
     }
 }
