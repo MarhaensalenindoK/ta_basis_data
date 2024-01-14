@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Dvd;
+use App\Services\DVDIDGenerator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,10 +14,19 @@ class DvdSeeder extends Seeder
      */
     public function run(): void
     {
-        Dvd::factory(1)->create([
+        $firstDvd = Dvd::factory()->create([
+            'DVDID' => DVDIDGenerator::generateId(null),
             'judul' => 'Die Another Day',
             'nama_pemeran' => 'Pierce Brosnan',
         ]);
-        Dvd::factory(10)->create();
+
+        $lastId = $firstDvd->DVDID;
+        for ($i = 1; $i <= 10; $i++) {
+            $dvd = Dvd::factory()->create([
+                'DVDID' => DVDIDGenerator::generateId($lastId),
+            ]);
+
+            $lastId = $dvd->DVDID;
+        }
     }
 }
