@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Tambah Teman Baru</h1>
-    <form action="{{ url('/teman') }}" method="POST">
+    <form action="{{ url('/user') }}" method="POST">
         @csrf
         <div class="form-group">
             <label>Nama:</label>

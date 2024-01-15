@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Peminjaman</h1>
-    <form action="{{ url('/peminjaman/' . $peminjaman->id) }}" method="POST">
+    <form action="{{ url('/transaction/' . $peminjaman->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">

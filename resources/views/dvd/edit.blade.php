@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Edit DVD</h1>
-    <form method="POST" action="{{ url('/dvd/' . $dvd->id) }}">
+    <form method="POST" action="{{ url('/product/' . $dvd->id) }}">
         @csrf
         @method('PUT')
         <div class="form-group">

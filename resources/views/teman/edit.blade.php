@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Teman</h1>
-    <form action="{{ url('/teman/' . $teman->id) }}" method="POST">
+    <form action="{{ url('/user/' . $teman->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
