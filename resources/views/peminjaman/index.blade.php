@@ -5,9 +5,9 @@
 @section('content')
 <div class="container">
     <h1>Daftar Peminjaman</h1>
-    <a href="{{ url('/peminjaman/create') }}" class="btn btn-primary mb-3">Tambah Peminjaman</a>
+    <a href="{{ url('/transaction/create') }}" class="btn btn-primary mb-3">Tambah Peminjaman</a>
 
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($peminjaman as $pinjam)
+            @forelse($peminjaman as $pinjam)
                 <tr>
                     <td>{{ $pinjam->id }}</td>
                     <td>{{ $pinjam->TID }}</td>
@@ -27,15 +27,19 @@
                     <td>{{ $pinjam->tgl_peminjaman }}</td>
                     <td>{{ $pinjam->tgl_pengembalian }}</td>
                     <td>
-                        <a href="{{ url('/peminjaman/' . $pinjam->id . '/edit') }}" class="btn btn-info">Edit</a>
-                        <form action="{{ url('/peminjaman/' . $pinjam->id) }}" method="POST" style="display: inline;">
+                        <a href="{{ url('/transaction/' . $pinjam->id . '/edit') }}" class="btn btn-info">Edit</a>
+                        <form action="{{ url('/transaction/' . $pinjam->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus peminjaman ini?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada data</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

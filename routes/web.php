@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DvdController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TemanController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,26 +19,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('dashboard'));
 });
 
-Route::get('/teman', [TemanController::class, 'index']);
-Route::get('/teman/create', [TemanController::class, 'create']);
-Route::post('/teman', [TemanController::class, 'store']);
-Route::delete('/teman/{id}', [TemanController::class, 'destroy']);
-Route::get('/teman/{id}/edit', [TemanController::class, 'edit']);
-Route::put('/teman/{id}', [TemanController::class, 'update']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::get('/peminjaman', [PeminjamanController::class, 'index']);
-Route::get('/peminjaman/create', [PeminjamanController::class, 'create']);
-Route::post('/peminjaman', [PeminjamanController::class, 'store']);
-Route::get('/peminjaman/{id}/edit', [PeminjamanController::class, 'edit']);
-Route::put('/peminjaman/{id}', [PeminjamanController::class, 'update']);
-Route::delete('/peminjaman/{id}', [PeminjamanController::class, 'destroy']);
+Route::get('/report', [ReportController::class, 'index']);
 
-Route::get('/dvd', [DvdController::class, 'index']);
-Route::get('/dvd/create', [DvdController::class, 'create']);
-Route::post('/dvd', [DvdController::class, 'store']);
-Route::get('/dvd/{id}/edit', [DvdController::class, 'edit']);
-Route::put('/dvd/{id}', [DvdController::class, 'update']);
-Route::delete('/dvd/{id}', [DvdController::class, 'destroy']);
+Route::get('/user', [TemanController::class, 'index']);
+Route::get('/user/create', [TemanController::class, 'create']);
+Route::post('/user', [TemanController::class, 'store']);
+Route::delete('/user/{id}', [TemanController::class, 'destroy']);
+Route::get('/user/{id}/edit', [TemanController::class, 'edit']);
+Route::put('/user/{id}', [TemanController::class, 'update']);
+
+Route::get('/transaction', [PeminjamanController::class, 'index']);
+Route::get('/transaction/create', [PeminjamanController::class, 'create']);
+Route::post('/transaction', [PeminjamanController::class, 'store']);
+Route::get('/transaction/{id}/edit', [PeminjamanController::class, 'edit']);
+Route::put('/transaction/{id}', [PeminjamanController::class, 'update']);
+Route::delete('/transaction/{id}', [PeminjamanController::class, 'destroy']);
+
+Route::get('/product', [DvdController::class, 'index']);
+Route::get('/product/create', [DvdController::class, 'create']);
+Route::post('/product', [DvdController::class, 'store']);
+Route::get('/product/{id}/edit', [DvdController::class, 'edit']);
+Route::put('/product/{id}', [DvdController::class, 'update']);
+Route::delete('/product/{id}', [DvdController::class, 'destroy']);

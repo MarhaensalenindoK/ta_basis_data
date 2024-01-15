@@ -7,7 +7,7 @@
     <h1>Daftar Teman</h1>
     <a href="{{ url('/teman/create') }}" class="btn btn-primary mb-3">Tambah Teman Baru</a>
 
-    <table class="table">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($data as $teman)
+            @forelse($data as $teman)
                 <tr>
                     <td>{{ $teman->id }}</td>
                     <td>{{ $teman->nama }}</td>
@@ -35,7 +35,11 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada data</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

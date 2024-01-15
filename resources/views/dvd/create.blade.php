@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Buat DVD Baru</h1>
-    <form method="POST" action="{{ url('/dvd') }}">
+    <form method="POST" action="{{ url('/product') }}">
         @csrf
         <div class="form-group">
             <label for="judul">Judul:</label>
