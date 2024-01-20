@@ -10,7 +10,7 @@
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>TID</th>
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
@@ -21,14 +21,14 @@
         <tbody>
             @forelse($data as $teman)
                 <tr>
-                    <td>{{ $teman->id }}</td>
+                    <td>{{ $teman->TID }}</td>
                     <td>{{ $teman->nama }}</td>
                     <td>{{ $teman->alamat }}</td>
                     <td>{{ $teman->telepon }}</td>
                     <td>{{ $teman->email }}</td>
                     <td>
-                        <a href="{{ url('/teman/' . $teman->id . '/edit') }}" class="btn btn-info">Edit</a>
-                        <form action="{{ url('/teman/' . $teman->id) }}" method="POST" style="display: inline;">
+                        <a href="{{ url('/teman/' . $teman->TID . '/edit') }}" class="btn btn-info">Edit</a>
+                        <form action="{{ url('/teman/' . $teman->TID) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus teman ini?')">Hapus</button>

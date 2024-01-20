@@ -19,12 +19,12 @@
         <tbody>
             @forelse($dvds as $dvd)
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
+                    <th scope="row">{{ $dvd->DVDID }}</th>
                     <td>{{ $dvd->judul }}</td>
                     <td>{{ $dvd->nama_pemeran }}</td>
                     <td>
-                        <a href="{{ url('/product/' . $dvd->id . '/edit') }}" class="btn btn-sm btn-info">Edit</a>
-                        <form action="{{ url('/product/' . $dvd->id) }}" method="POST" style="display: inline;">
+                        <a href="{{ url('/product/' . $dvd->DVDID . '/edit') }}" class="btn btn-sm btn-info">Edit</a>
+                        <form action="{{ url('/product/' . $dvd->DVDID) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?')">Hapus</button>

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(route('dashboard'));
+    return redirect('dashboard');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index']);

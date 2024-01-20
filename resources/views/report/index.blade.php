@@ -18,7 +18,9 @@
         <p>
             <b>Query</b>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum aliquam repudiandae, explicabo quibusdam rem et. Id, ab debitis at beatae voluptate ipsam quia.
+                <code style="font-size: 18px;">
+                    {{$januaryQuery}}
+                </code>
             </p>
         </p>
 
@@ -33,11 +35,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>The Shawshank Redemption</td>
-                        <td>John Doe</td>
-                        <td>2024-01-10</td>
-                    </tr>
+                    @foreach ($januaryData as $item)
+                        <tr>
+                            <td>{{$item['judul']}}</td>
+                            <td>{{$item['nama']}}</td>
+                            <td>{{Carbon\Carbon::parse($item['tgl_peminjaman'])->format('Y-m-d')}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>
@@ -50,7 +54,9 @@
         <p>
             <b>Query</b>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum aliquam repudiandae, explicabo quibusdam rem et. Id, ab debitis at beatae voluptate ipsam quia.
+                <code style="font-size: 18px;">
+                    {{$mostTransactionQuery}}
+                </code>
             </p>
         </p>
 
@@ -60,16 +66,16 @@
                 <thead>
                     <tr>
                         <th>Peminjam</th>
-                        <th>Judul DVD</th>
-                        <th>Tanggal Pinjam</th>
+                        <th>Jumlah Pinjam</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>The Shawshank Redemption</td>
-                        <td>2024-01-10</td>
-                    </tr>
+                    @foreach ($mostTransaction as $item)
+                        <tr>
+                            <td>{{$item['nama']}}</td>
+                            <td>{{$item['jumlah_peminjaman']}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>
@@ -82,7 +88,9 @@
         <p>
             <b>Query</b>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum aliquam repudiandae, explicabo quibusdam rem et. Id, ab debitis at beatae voluptate ipsam quia.
+                <code style="font-size: 18px;">
+                    {{$lastTransactionQuery}}
+                </code>
             </p>
         </p>
 
@@ -92,15 +100,15 @@
                 <thead>
                     <tr>
                         <th>Judul DVD</th>
-                        <th>Tanggal Pinjam</th>
-                        <th>Peminjam</th>
+                        <th>Tanggal Pinjam Terakhir</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>The Shawshank Redemption</td>
-                        <td>2024-01-10</td>
-                        <td>John Doe</td>
+                        <td>
+                            {{$lastTransaction['judul']}}
+                        </td>
+                        <td>{{Carbon\Carbon::parse($item['tgl_peminjaman'])->format('Y-m-d')}}</td>
                     </tr>
                 </tbody>
             </table>
