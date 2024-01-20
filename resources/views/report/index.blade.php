@@ -3,6 +3,44 @@
 
 @section('title', 'Report - Query')
 
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+<style>
+    /* Style untuk kontainer kode */
+    .pre-container {
+        position: relative;
+        background: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        color: #333;
+    }
+
+    /* Style untuk tombol copy */
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Style untuk tag <code> */
+    code {
+        white-space: pre;
+        overflow-x: auto;
+        font-size: 1.4rem !important;
+    }
+
+    /* Menonaktifkan overflow-x default highlight.js */
+    .hljs {
+        white-space: pre-wrap;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container mt-4">
     <h2>Report Query Request</h2>
@@ -17,11 +55,10 @@
         </h4>
         <p>
             <b>Query</b>
-            <p>
-                <code style="font-size: 18px;">
-                    {{$januaryQuery}}
-                </code>
-            </p>
+            <div class="pre-container pre-container-1">
+                <button class="copy-button" onclick="copyToClipboard(1)">Copy</button>
+                <pre><code class="sql hljs">{{$januaryQuery ?? '-'}}</code></pre>
+            </div>
         </p>
 
         <section class="mt-4">
@@ -35,13 +72,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($januaryData as $item)
+                    @forelse($januaryData as $item)
                         <tr>
                             <td>{{$item['judul']}}</td>
                             <td>{{$item['nama']}}</td>
                             <td>{{Carbon\Carbon::parse($item['tgl_peminjaman'])->format('Y-m-d')}}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </section>
@@ -53,11 +94,10 @@
         </h4>
         <p>
             <b>Query</b>
-            <p>
-                <code style="font-size: 18px;">
-                    {{$mostTransactionQuery}}
-                </code>
-            </p>
+            <div class="pre-container pre-container-2">
+                <button class="copy-button" onclick="copyToClipboard(2)">Copy</button>
+                <pre><code class="sql hljs">{{$mostTransactionQuery ?? '-'}}</code></pre>
+            </div>
         </p>
 
         <section class="mt-4">
@@ -70,12 +110,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mostTransaction as $item)
+                    @forelse ($mostTransaction as $item)
                         <tr>
                             <td>{{$item['nama']}}</td>
                             <td>{{$item['jumlah_peminjaman']}}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="2" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </section>
@@ -87,11 +131,10 @@
         </h4>
         <p>
             <b>Query</b>
-            <p>
-                <code style="font-size: 18px;">
-                    {{$lastTransactionQuery}}
-                </code>
-            </p>
+            <div class="pre-container pre-container-3">
+                <button class="copy-button" onclick="copyToClipboard(3)">Copy</button>
+                <pre><code class="sql hljs">{{$lastTransactionQuery ?? '-'}}</code></pre>
+            </div>
         </p>
 
         <section class="mt-4">
@@ -104,12 +147,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if ($lastTransaction)
                     <tr>
                         <td>
                             {{$lastTransaction['judul']}}
                         </td>
                         <td>{{Carbon\Carbon::parse($item['tgl_peminjaman'])->format('Y-m-d')}}</td>
                     </tr>
+                @else
+                    <tr>
+                        <td colspan="2" class="text-center">Tidak ada data</td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </section>
@@ -120,4 +169,17 @@
 @endsection
 
 @push('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+
+    function copyToClipboard(field) {
+        const textToCopy = document.querySelector(`.pre-container-${field} code`).innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert('Kode berhasil disalin!');
+        }, (err) => {
+            alert('Gagal menyalin kode: ', err);
+        });
+    }
+</script>
 @endpush
