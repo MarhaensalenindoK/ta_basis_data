@@ -36,7 +36,7 @@ class PeminjamanController extends Controller
         $peminjaman->TID = $request->TID;
         $peminjaman->DVDID = $request->DVDID;
         $peminjaman->tgl_peminjaman = Carbon::parse($request->tgl_peminjaman)->startOfDay();
-        $peminjaman->tgl_pengembalian = Carbon::parse($request->tgl_pengembalian)->endOfDay();
+        $peminjaman->tgl_pengembalian =$request->tgl_pengembalian ? Carbon::parse($request->tgl_pengembalian)->endOfDay() : null;
         $peminjaman->save();
 
         return redirect('/transaction');
