@@ -29,7 +29,7 @@
                     <td>{{ $pinjam->nama_teman }}</td>
                     <td>{{ $pinjam->judul_dvd }}</td>
                     <td>{{ Carbon\Carbon::parse($pinjam->tgl_peminjaman)->locale('id_ID')->format('Y-m-d') }}</td>
-                    <td>{{ Carbon\Carbon::parse($pinjam->tgl_pengembalian)->locale('id_ID')->format('Y-m-d') }}</td>
+                    <td>{{ $pinjam->tgl_pengembalian ? Carbon\Carbon::parse($pinjam->tgl_pengembalian)->locale('id_ID')->format('Y-m-d') : 'Belum dikembalikan' }}</td>
                     <td>
                         <a href="{{ url('/transaction/' . $pinjam->PID . '/edit') }}" class="btn btn-info">Edit</a>
                         <form action="{{ url('/transaction/' . $pinjam->PID) }}" method="POST" style="display: inline;">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use App\Models\Teman;
 use App\Services\TIDGenerator;
 use Illuminate\Http\Request;
@@ -38,6 +39,8 @@ class TemanController extends Controller
     public function destroy($id)
     {
         $teman = Teman::find($id);
+        Peminjaman::where('TID', $teman->TID)->delete();
+
         $teman->delete();
 
         return redirect('/user');
