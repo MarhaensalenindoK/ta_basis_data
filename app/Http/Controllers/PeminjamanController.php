@@ -13,7 +13,10 @@ class PeminjamanController extends Controller
 {
     public function index()
     {
-        $peminjaman = Peminjaman::all();
+        $peminjaman = Peminjaman::join('tb_teman', 'tb_peminjaman.TID', '=', 'tb_teman.TID')
+        ->join('tb_dvd', 'tb_peminjaman.DVDID', '=', 'tb_dvd.DVDID')
+        ->select('tb_peminjaman.*', 'tb_teman.nama as nama_teman', 'tb_dvd.judul as judul_dvd')
+        ->get();
 
         return view('peminjaman.index')->with('peminjaman', $peminjaman);
     }
@@ -45,7 +48,13 @@ class PeminjamanController extends Controller
     public function edit($id)
     {
         $peminjaman = Peminjaman::find($id);
-        return view('peminjaman.edit', ['peminjaman' => $peminjaman]);
+        $dvds = Dvd::select('DVDID', 'judul')->get();
+        $teman = Teman::select('TID', 'nama')->get();
+
+        return view('peminjaman.edit')
+        ->with('peminjaman', $peminjaman)
+        ->with('dvds', $dvds)
+        ->with('teman', $teman);
     }
 
     public function update(Request $request, $id)
