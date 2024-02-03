@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dvd;
+use App\Models\Peminjaman;
 use App\Services\DVDIDGenerator;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,10 @@ class DvdController extends Controller
 
     public function destroy($id)
     {
-        Dvd::find($id)->delete();
+        $dvd = Dvd::find($id);
+        Peminjaman::where('DVDID', $dvd->DVDID)->delete();
+        
+        $dvd->delete();
 
         return redirect('/product');
     }
