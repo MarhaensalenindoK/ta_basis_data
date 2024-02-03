@@ -5,24 +5,42 @@
 @section('content')
 <div class="container">
     <h1>Edit Peminjaman</h1>
-    <form action="{{ url('/transaction/' . $peminjaman->id) }}" method="POST">
+    <form action="{{ url('/transaction/' . $peminjaman->PID) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="TID">TID:</label>
-            <input type="text" class="form-control" id="TID" name="TID" value="{{ $peminjaman->TID }}">
+            <label>TID:</label>
+            <select name="TID" class="form-control">
+                @foreach ($teman as $item)
+                    <option  value="{{$item['TID']}}"
+                    @if ($item['TID'] === $peminjaman->TID)
+                    selected
+                    @endif
+                    >{{$item['nama']}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label for="DVDID">DVDID:</label>
-            <input type="text" class="form-control" id="DVDID" name="DVDID" value="{{ $peminjaman->DVDID }}">
+            <label>DVDID:</label>
+            <select name="DVDID" class="form-control">
+                @foreach ($dvds as $item)
+                    <option value="{{$item['DVDID']}}"
+                    @if ($item['DVDID'] === $peminjaman->DVDID)
+                    selected
+                    @endif
+                    >{{$item['judul']}}</option>
+                @endforeach
+            </select>
         </div>
+
         <div class="form-group">
             <label for="tgl_peminjaman">Tanggal Peminjaman:</label>
-            <input type="date" class="form-control" id="tgl_peminjaman" name="tgl_peminjaman" value="{{ $peminjaman->tgl_peminjaman }}">
+            <input type="date" class="form-control" id="tgl_peminjaman" name="tgl_peminjaman" value="{{ \Carbon\Carbon::parse($peminjaman->tgl_peminjaman)->format('Y-m-d') }}">
+
         </div>
         <div class="form-group">
             <label for="tgl_pengembalian">Tanggal Pengembalian:</label>
-            <input type="date" class="form-control" id="tgl_pengembalian" name="tgl_pengembalian" value="{{ $peminjaman->tgl_pengembalian }}">
+            <input type="date" class="form-control" id="tgl_peminjaman" name="tgl_peminjaman" value="{{ \Carbon\Carbon::parse($peminjaman->tgl_pengembalian)->format('Y-m-d') }}">
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
