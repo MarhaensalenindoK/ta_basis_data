@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <h1>Daftar Teman</h1>
-    <a href="{{ url('/teman/create') }}" class="btn btn-primary mb-3">Tambah Teman Baru</a>
+    <a href="{{ url('/user/create') }}" class="btn btn-primary mb-3">Tambah Teman Baru</a>
 
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -27,8 +27,8 @@
                     <td>{{ $teman->telepon }}</td>
                     <td>{{ $teman->email }}</td>
                     <td>
-                        <a href="{{ url('/teman/' . $teman->TID . '/edit') }}" class="btn btn-info">Edit</a>
-                        <form action="{{ url('/teman/' . $teman->TID) }}" method="POST" style="display: inline;">
+                        <a href="{{ url('/user/' . $teman->TID . '/edit') }}" class="btn btn-info">Edit</a>
+                        <form action="{{ url('/user/' . $teman->TID) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus teman ini?')">Hapus</button>

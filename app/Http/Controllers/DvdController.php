@@ -23,18 +23,19 @@ class DvdController extends Controller
     public function store(Request $request)
     {
         $dvd = new Dvd;
-        $lastId = Dvd::orderBy('created_at', 'desc')->first()->DVDID;
+        $lastId = Dvd::orderBy('DVDID', 'desc')->get()->first()->DVDID;
+
         $dvd->DVDID = DVDIDGenerator::generateId($lastId);
         $dvd->judul = $request->judul;
         $dvd->nama_pemeran = $request->nama_pemeran;
         $dvd->save();
 
-        return redirect('/dvd');
+        return redirect('/product');
     }
 
     public function edit($id)
     {
-        $dvd = Dvd::find($id);
+        $dvd = Dvd::find($id)->toArray();
 
         return view('dvd.edit')->with('dvd', $dvd);
     }
@@ -46,13 +47,13 @@ class DvdController extends Controller
         $dvd->nama_pemeran = $request->nama_pemeran;
         $dvd->save();
 
-        return redirect('/dvd');
+        return redirect('/product');
     }
 
     public function destroy($id)
     {
         Dvd::find($id)->delete();
 
-        return redirect('/dvd');
+        return redirect('/product');
     }
 }

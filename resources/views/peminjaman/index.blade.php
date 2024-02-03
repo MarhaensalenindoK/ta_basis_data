@@ -13,6 +13,8 @@
                 <th>ID</th>
                 <th>TID</th>
                 <th>DVDID</th>
+                <th>Nama Teman</th>
+                <th>Judul DVD</th>
                 <th>Tanggal Peminjaman</th>
                 <th>Tanggal Pengembalian</th>
                 <th>Aksi</th>
@@ -24,6 +26,8 @@
                     <td>{{ $pinjam->PID }}</td>
                     <td>{{ $pinjam->TID }}</td>
                     <td>{{ $pinjam->DVDID }}</td>
+                    <td>{{ $pinjam->nama_teman }}</td>
+                    <td>{{ $pinjam->judul_dvd }}</td>
                     <td>{{ Carbon\Carbon::parse($pinjam->tgl_peminjaman)->locale('id_ID')->format('Y-m-d') }}</td>
                     <td>{{ $pinjam->tgl_pengembalian ? Carbon\Carbon::parse($pinjam->tgl_pengembalian)->locale('id_ID')->format('Y-m-d') : 'Belum dikembalikan' }}</td>
                     <td>

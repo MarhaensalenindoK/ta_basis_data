@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class TemanController extends Controller
 {
-    
+
     public function index()
     {
         $data = Teman::all();
@@ -24,7 +24,7 @@ class TemanController extends Controller
     public function store(Request $request)
     {
         $teman = new Teman;
-        $lastId = Teman::orderBy('created_at', 'desc')->first()->TID;
+        $lastId = Teman::orderBy('TID', 'desc')->first()->TID;
         $teman->TID = TIDGenerator::generateId($lastId);
         $teman->nama = $request->nama;
         $teman->alamat = $request->alamat;
@@ -32,7 +32,7 @@ class TemanController extends Controller
         $teman->email = $request->email;
         $teman->save();
 
-        return redirect('/teman');
+        return redirect('/user');
     }
 
     public function destroy($id)
@@ -40,16 +40,17 @@ class TemanController extends Controller
         $teman = Teman::find($id);
         $teman->delete();
 
-        return redirect('/teman');
+        return redirect('/user');
     }
 
     public function edit($id)
     {
-        $teman = Teman::find($id);
+        $teman = Teman::find($id)->toArray();
+
         return view('teman.edit', ['teman' => $teman]);
     }
 
-    public function update(Request $request) 
+    public function update(Request $request)
     {
         $teman = Teman::find($request->id);
         $teman->nama = $request->nama;
@@ -58,6 +59,6 @@ class TemanController extends Controller
         $teman->email = $request->email;
         $teman->save();
 
-        return redirect('/teman');
+        return redirect('/user');
     }
 }
