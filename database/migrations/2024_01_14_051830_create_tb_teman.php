@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_teman', function (Blueprint $table) {
-            $table->string('TID', 10)->primary();
+            $table->string('TID', 6)->primary();
             $table->string('nama');
             $table->text('alamat');
             $table->string('telepon');

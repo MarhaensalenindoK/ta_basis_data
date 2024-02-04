@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_dvd', function (Blueprint $table) {
-            $table->string('DVDID', 12)->primary();
+            $table->string('DVDID', 8)->primary();
             $table->string('judul');
             $table->string('nama_pemeran');
             $table->timestamps();
